@@ -3,252 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond Labels: Visual Invariance in Self-Supervised Learning</title>
+    <title>Beyond Labels: Visual Invariance in SSL for Aramaic Bowls</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #2980b9;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-        }
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             line-height: 1.6;
-            color: var(--text-color);
             max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: auto;
+            padding: 30px;
+            color: #222;
+            background-color: #fafafa;
         }
-        header {
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+        h1, h2, h3 { color: #1a365d; }
+        h1 { 
+            text-align: center; 
+            border-bottom: 2px solid #1a365d; 
+            padding-bottom: 15px; 
+            font-size: 2.2em;
+        }
+        h2 { margin-top: 40px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .author-info {
             text-align: center;
-            padding: 40px 0;
-            border-bottom: 2px solid #eee;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            color: #444;
+        }
+        .abstract {
+            background-color: #f0f4f8;
+            padding: 25px;
+            border-left: 4px solid #1a365d;
+            font-style: italic;
             margin-bottom: 40px;
         }
-        h1 { color: var(--primary-color); }
-        h2 { 
-            color: var(--secondary-color); 
-            margin-top: 40px; 
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 10px; 
+        .abstract strong { font-style: normal; }
+        
+        .btn-zenodo {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 30px auto;
+            background-color: #024b7a;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-        .intro-box {
-            background: var(--bg-color);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--secondary-color);
-            margin: 20px 0;
-        }
-        .pipeline-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+        .btn-zenodo:hover { background-color: #013558; }
+
+        .image-container {
+            text-align: center;
             margin: 30px 0;
         }
-        .step {
-            flex: 1;
-            background: #e8f4f8;
-            padding: 15px;
-            text-align: center;
-            border-radius: 6px;
-            font-weight: bold;
-            min-width: 150px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .arrow {
-            color: #95a5a6;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .figure {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .figure img {
+        .image-container img {
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
-            border-radius: 8px;
             padding: 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background-color: #fff;
         }
+        
+        /* Grid for Step-by-Step Pipeline */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .pipeline-step {
+            text-align: center;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .pipeline-step img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        .pipeline-step h4 {
+            margin: 0 0 5px 0;
+            color: #1a365d;
+            font-family: Arial, sans-serif;
+            font-size: 0.9em;
+        }
+        
+        /* Grid for Experiment Results */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .grid-item {
+            text-align: center;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        .grid-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .grid-item p {
+            margin: 0;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #555;
+            font-family: Arial, sans-serif;
+        }
+
         .caption {
             font-size: 0.9em;
-            color: #666;
-            margin-top: 12px;
-            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+            text-align: center;
         }
+        ul, ol { margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 30px 0;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.95em;
+            font-family: Arial, sans-serif;
         }
         th, td {
-            padding: 15px;
             border: 1px solid #ddd;
+            padding: 12px;
             text-align: center;
         }
-        th {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .highlight { font-weight: bold; color: var(--secondary-color); }
-        .hypotheses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-        .hypothesis-card {
-            background: #fff;
-            border: 1px solid #eee;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+        th { background-color: #f4f7f6; font-weight: bold; color: #1a365d; }
+        .highlight { font-weight: bold; color: #d35400; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Beyond Labels: Visual Invariance in Self-Supervised Learning for Aramaic Bowls</h1>
-    </header>
+<div class="container">
+    <h1>Beyond Labels: Visual Invariance in Self-Supervised Learning for Aramaic Bowls</h1>
+    
+    <div class="author-info">
+        <p><strong>Boraq Madi</strong></p>
+        <p>Computer Science Department, The Academic College of Tel Aviv–Yaffo</p>
+    </div>
 
-    <section id="introduction">
-        <h2>Introduction</h2>
-        <div class="intro-box">
-            <p>Aramaic incantation bowls from Late Antiquity present a highly challenging visual domain characterized by severe material degradation, irregular layouts, and ambiguous letter morphology. This research facilitates the spatial-cultural mapping of these historical artifacts, capturing diverse ritual practices and regional writing conventions without relying on super-resolution methodologies. Instead, we systematically evaluate self-supervised learning (SSL) frameworks by treating augmentation strategies as explicit hypotheses about visual identity.</p>
+    <a href="https://zenodo.org/" target="_blank" class="btn-zenodo">Access Dataset on Zenodo</a>
+
+    <div class="abstract">
+        <p><strong>Abstract.</strong> Aramaic incantation bowls from Late Antiquity present a highly challenging visual domain characterized by severe material degradation, irregular layouts, and ambiguous letter morphology. Under such conditions, supervised learning is limited by the scarcity and instability of reliable paleographic labels. Self-supervised learning (SSL) offers an alternative to learning visual representations without explicit annotations; however, its effectiveness depends critically on the invariance assumptions encoded by data augmentations.</p>
+        <p>In this work, we systematically evaluate seven SSL frameworks on a curated dataset of segmented Aramaic incantation bowl letters. We formulate augmentation strategies as explicit hypotheses about visual identity: H1 (appearance-based transformations), H2 (structure-aware modifications), H3 (historically motivated degradations). Our results show that augmentation design substantially influences representation quality. In particular, structural and historically motivated hypotheses (H2, H3) consistently outperform appearance-only transformations (H1).</p>
+    </div>
+
+    <h2>1. Introduction</h2>
+    <p>Aramaic incantation bowls from Late Antiquity contain dense handwritten inscriptions arranged in circular and spiral layouts over curved clay surfaces. These artifacts exhibit extreme variability in letter morphology, irregular spacing, non-uniform backgrounds, and substantial material degradation.</p>
+    <p>The primary focus of this research is the <strong>spatial-cultural mapping</strong> of these historical artifacts. By analyzing the structural invariances and geometric consistency of the letter forms without relying on manual ground-truth, we aim to map diverse regional writing conventions and ritual practices. This approach ensures that representations are securely anchored in authentic historical and spatial variability, mapping the cultural spread of scribal traditions.</p>
+
+    <h2>2. Dataset and Extraction Pipeline</h2>
+    <p>The dataset is derived from a collection of 32 Aramaic incantation bowls dated to Late Antiquity (4th-7th centuries CE), comprising approximately 8,600 extracted letter-like units. Letter instances are extracted through an automatic multi-stage pipeline designed to operate consistently across bowls with diverse preservation conditions.</p>
+    
+    <div class="image-container">
+        <img src="images/pipeline_overview2.jpg" alt="High-level overview of the extraction pipeline">
+        <div class="caption"><strong>Figure 1:</strong> Overview of the automated extraction pipeline mapping original artifacts to isolated glyphs.</div>
+    </div>
+
+    <h3>Step-by-Step Progression</h3>
+    <div class="pipeline-grid">
+        <div class="pipeline-step">
+            <h4>1. Original Image</h4>
+            <img src="images/original_sample.png" alt="Original bowl sample">
         </div>
-    </section>
+        <div class="pipeline-step">
+            <h4>2. Line Localization</h4>
+            <img src="images/Text-Line.jpg" alt="Text line trajectories">
+        </div>
+        <div class="pipeline-step">
+            <h4>3. YOLOv12 Detection</h4>
+            <img src="images/detections_letetrs.jpg" alt="Letter bounding boxes">
+        </div>
+        <div class="pipeline-step">
+            <h4>4. SAM Segmentation</h4>
+            <img src="images/letters_segmentations.jpg" alt="Pixel-level segmentation masks">
+        </div>
+    </div>
+    
+    <ol>
+        <li><strong>Line Localization:</strong> Baseline annotations restrict the search space by defining text-line trajectories.</li>
+        <li><strong>YOLOv12 Detection:</strong> A domain-adapted object detection model identifies candidate letter bounding boxes.</li>
+        <li><strong>SAM Refinement:</strong> The Segment Anything Model (SAM) generates precise segmentation masks to isolate foreground strokes.</li>
+        <li><strong>Binary Letter Crops:</strong> Refined regions are cropped and converted into standardized binary patches to emphasize structural information.</li>
+    </ol>
 
-    <section id="dataset">
-        <h2>Dataset Overview</h2>
-        <p>The curated dataset is derived from authentic historical materials, presenting conditions of extreme visual variability.</p>
-        <ul>
-            <li><strong>Source Material:</strong> 32 Aramaic incantation bowls dated to Late Antiquity (4th-7th centuries CE).</li>
-            <li><strong>Volume:</strong> Approximately 8,600 extracted letter-like units (averaging ~260 units per bowl).</li>
-            <li><strong>Annotations:</strong> Includes baseline annotations, letter bounding box detections, and segmentation masks.</li>
-        </ul>
+    <h2>3. Augmentation Hypotheses</h2>
+    <p>We formalize data augmentations as explicit hypotheses regarding which visual properties can vary while preserving the underlying glyph form:</p>
+    <ul>
+        <li><strong>H1 (Appearance Invariance):</strong> Assumes letter identity remains stable under photometric and surface-level changes.</li>
+        <li><strong>H2 (Structural Invariance):</strong> Assumes identity is preserved despite geometric and stroke-level variations.</li>
+        <li><strong>H3 (Historical Variability):</strong> Assumes identity persists under historical degradation (e.g., ink erosion, partial occlusion).</li>
+    </ul>
 
-        <div class="figure">
-            <img src="images/figure1-dataset.jpg" alt="Representative samples from the dataset illustrating variability in preservation quality">
-            <div class="caption">Figure 1: Representative samples illustrating variability in preservation quality, ranging from clearly legible inscriptions to heavily degraded surfaces.</div>
+    <h2>4. Experimental Results</h2>
+    
+    <h3>Embedding Visualizations</h3>
+    <div class="results-grid">
+        <div class="grid-item">
+            <img src="images/H1_Barralow.png" alt="Barlow Twins H1">
+            <p>Barlow Twins - H1</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/H2_Barralow.png" alt="Barlow Twins H2">
+            <p>Barlow Twins - H2</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/H3_Barralow.jpg" alt="Barlow Twins H3">
+            <p>Barlow Twins - H3</p>
         </div>
 
-        <div class="figure">
-            <img src="images/figure2-structure.jpg" alt="Dataset structure overview">
-            <div class="caption">Figure 2: Dataset structure showing the original image, line annotations, letter detections, and segmentation masks.</div>
+        <div class="grid-item">
+            <img src="images/H1_SWAV.png" alt="SwAV H1">
+            <p>SwAV - H1</p>
         </div>
-    </section>
-
-    <section id="pipeline">
-        <h2>Automatic Multi-Stage Extraction Pipeline</h2>
-        <p>Letter instances are isolated consistently across all diverse preservation conditions using the following pipeline:</p>
-        
-        <div class="pipeline-container">
-            <div class="step">Line Localization</div>
-            <div class="arrow">&#10140;</div>
-            <div class="step">YOLOv12 Detection</div>
-            <div class="arrow">&#10140;</div>
-            <div class="step">SAM Refinement</div>
-            <div class="arrow">&#10140;</div>
-            <div class="step">Binary Letter Crops</div>
+        <div class="grid-item">
+            <img src="images/H2_SWAV.png" alt="SwAV H2">
+            <p>SwAV - H2</p>
         </div>
-    </section>
-
-    <section id="experiments">
-        <h2>Experiment Visuals & Augmentation Hypotheses</h2>
-        <p>We formulate three distinct hypotheses regarding visual invariance during self-supervised training:</p>
-        
-        <div class="hypotheses-grid">
-            <div class="hypothesis-card">
-                <h3>H1: Appearance Invariance</h3>
-                <p>Assumes identity remains stable under photometric and surface-level changes.</p>
-            </div>
-            <div class="hypothesis-card">
-                <h3>H2: Structural Invariance</h3>
-                <p>Assumes identity is preserved despite geometric and stroke-level variations.</p>
-            </div>
-            <div class="hypothesis-card">
-                <h3>H3: Historical Variability</h3>
-                <p>Assumes identity persists under historical degradation (ink erosion, decay, partial occlusion).</p>
-            </div>
+        <div class="grid-item">
+            <img src="images/H3_SWAV.png" alt="SwAV H3">
+            <p>SwAV - H3</p>
         </div>
-        
-        <div class="figure">
-            <img src="images/figure4-5-6-hypotheses.jpg" alt="Visual representation of hypotheses H1, H2, and H3">
-            <div class="caption">Figure 3: Examples comparing the visual transformations under appearance (H1), structural (H2), and historical variability (H3) assumptions.</div>
+
+        <div class="grid-item">
+            <img src="images/H1_VicReg.png" alt="VICReg H1">
+            <p>VICReg - H1</p>
         </div>
-    </section>
+        <div class="grid-item">
+            <img src="images/H2_VicReg.jpg" alt="VICReg H2">
+            <p>VICReg - H2</p>
+        </div>
+        <div class="grid-item">
+            <img src="images/H3_VicReg.png" alt="VICReg H3">
+            <p>VICReg - H3</p>
+        </div>
+    </div>
 
-    <section id="results">
-        <h2>Key Results</h2>
-        <p>Evaluation using K-Nearest Neighbors (KNN) and Linear Probing demonstrates that augmentation design heavily influences representation quality. Structural augmentation (H2) and simulated historical degradation (H3) consistently outperform appearance-only enhancement (H1) across models.</p>
+    <h3>Classification Performance</h3>
+    <p>Representations were evaluated using K-Nearest Neighbors (KNN) and Linear Probing. Structural augmentation (H2) and simulated historical degradation (H3) consistently outperformed appearance-only enhancement (H1).</p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th rowspan="2">Model</th>
-                    <th colspan="2">H1 (Appearance)</th>
-                    <th colspan="2">H2 (Structural)</th>
-                    <th colspan="2">H3 (Historical)</th>
-                </tr>
-                <tr>
-                    <th>KNN</th>
-                    <th>Linear</th>
-                    <th>KNN</th>
-                    <th>Linear</th>
-                    <th>KNN</th>
-                    <th>Linear</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>SimSiam</td>
-                    <td>78.12</td>
-                    <td>74.89</td>
-                    <td>84.39</td>
-                    <td>84.33</td>
-                    <td>84.97</td>
-                    <td>83.67</td>
-                </tr>
-                <tr>
-                    <td>SwAV</td>
-                    <td>80.15</td>
-                    <td>77.67</td>
-                    <td class="highlight">88.09</td>
-                    <td>84.67</td>
-                    <td>86.91</td>
-                    <td>83.12</td>
-                </tr>
-                <tr>
-                    <td>VICReg</td>
-                    <td>81.23</td>
-                    <td>82.42</td>
-                    <td>86.21</td>
-                    <td>87.32</td>
-                    <td>87.10</td>
-                    <td class="highlight">89.05</td>
-                </tr>
-                <tr>
-                    <td>Barlow Twins</td>
-                    <td>79.06</td>
-                    <td>81.21</td>
-                    <td>82.11</td>
-                    <td>84.10</td>
-                    <td>84.10</td>
-                    <td>85.12</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <p><strong>Conclusion:</strong> SwAV yields the highest KNN accuracy under H2, promoting compact cluster formation, while VICReg achieves the best linear probing accuracy under H3 by encouraging variance preservation and decorrelation.</p>
-    </section>
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2">Model</th>
+                <th colspan="2">H1 (Appearance)</th>
+                <th colspan="2">H2 (Structural)</th>
+                <th colspan="2">H3 (Historical)</th>
+            </tr>
+            <tr>
+                <th>KNN</th>
+                <th>Linear</th>
+                <th>KNN</th>
+                <th>Linear</th>
+                <th>KNN</th>
+                <th>Linear</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SimSiam</td>
+                <td>78.12</td>
+                <td>74.89</td>
+                <td>84.39</td>
+                <td>84.33</td>
+                <td>84.97</td>
+                <td>83.67</td>
+            </tr>
+            <tr>
+                <td>SwAV</td>
+                <td>80.15</td>
+                <td>77.67</td>
+                <td class="highlight">88.09</td>
+                <td>84.67</td>
+                <td>86.91</td>
+                <td>83.12</td>
+            </tr>
+            <tr>
+                <td>VICReg</td>
+                <td>81.23</td>
+                <td>82.42</td>
+                <td>86.21</td>
+                <td>87.32</td>
+                <td>87.10</td>
+                <td class="highlight">89.05</td>
+            </tr>
+            <tr>
+                <td>Barlow Twins</td>
+                <td>79.06</td>
+                <td>81.21</td>
+                <td>82.11</td>
+                <td>84.10</td>
+                <td>84.10</td>
+                <td>85.12</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="caption"><strong>Table 1:</strong> Classification-based evaluation of self-supervised representations. SwAV and VICReg achieve the strongest overall performance under H2 and H3 hypotheses.</div>
+
+</div>
 
 </body>
 </html>
