@@ -45,20 +45,36 @@
             font-size: 2.5rem;
             font-weight: 700;
             max-width: 900px;
-            margin: 0 auto 20px auto;
+            margin: 0 auto 25px auto;
             line-height: 1.2;
         }
 
-        header p.author {
-            font-size: 1.2rem;
+        .authors {
+            font-size: 1.25rem;
             color: #cbd5e1;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .authors span {
+            display: inline-block;
+            margin: 0 12px;
         }
 
-        header p.affiliation {
-            font-size: 1rem;
+        .authors sup {
             color: #94a3b8;
-            margin-bottom: 30px;
+            font-weight: 400;
+            margin-left: 2px;
+        }
+
+        .affiliations {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 35px;
+        }
+
+        .affiliations p {
+            margin-bottom: 4px;
         }
 
         .btn {
@@ -255,8 +271,19 @@
 
     <header>
         <h1>Beyond Labels: Visual Invariance in Self-Supervised Learning for Aramaic Bowls</h1>
-        <p class="author"><strong>Boraq Madi</strong></p>
-        <p class="affiliation">Computer Science Department, The Academic College of Tel Aviv–Yaffo</p>
+        
+        <div class="authors">
+            <span>Boraq Madi<sup>1, 2</sup></span>
+            <span>Nour Atamni<sup>1</sup></span>
+            <span>Jihad El-Sana<sup>1</sup></span>
+            <span>Islam Nassar<sup>1</sup></span>
+        </div>
+        
+        <div class="affiliations">
+            <p><sup>1</sup> Department of Computer Science, Ben-Gurion University of the Negev, Beer-Sheva, Israel</p>
+            <p><sup>2</sup> The Academic College of Tel Aviv-Yaffo, Tel Aviv, Israel</p>
+        </div>
+
         <a href="https://zenodo.org/" target="_blank" class="btn">Access Dataset on Zenodo</a>
     </header>
 
@@ -439,7 +466,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Boraq Madi | The Academic College of Tel Aviv–Yaffo</p>
+        <p>&copy; 2026 Boraq Madi, Nour Atamni, Jihad El-Sana, Islam Nassar</p>
     </footer>
 
 </body>
