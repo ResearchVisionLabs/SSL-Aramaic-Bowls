@@ -70,11 +70,41 @@
         .affiliations {
             font-size: 0.95rem;
             color: #94a3b8;
-            margin-bottom: 35px;
+            margin-bottom: 15px;
         }
 
         .affiliations p {
             margin-bottom: 4px;
+        }
+
+        .equal-contrib {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-style: italic;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .emails {
+            font-size: 0.95rem;
+            margin-bottom: 35px;
+            color: #94a3b8;
+        }
+
+        .emails a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .emails a:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        .emails .separator {
+            margin: 0 10px;
+            color: #475569;
         }
 
         .btn {
@@ -273,15 +303,23 @@
         <h1>Beyond Labels: Visual Invariance in Self-Supervised Learning for Aramaic Bowls</h1>
         
         <div class="authors">
-            <span>Boraq Madi<sup>1, 2</sup></span>
-            <span>Nour Atamni<sup>1</sup></span>
+            <span>Nour Atamni<sup>1, *</sup></span>
+            <span>Boraq Madi<sup>2, *</sup></span>
+            <span>Islam Ammar<sup>1</sup></span>
             <span>Jihad El-Sana<sup>1</sup></span>
-            <span>Islam Nassar<sup>1</sup></span>
         </div>
         
         <div class="affiliations">
             <p><sup>1</sup> Department of Computer Science, Ben-Gurion University of the Negev, Beer-Sheva, Israel</p>
             <p><sup>2</sup> The Academic College of Tel Aviv-Yaffo, Tel Aviv, Israel</p>
+            <p class="equal-contrib"><sup>*</sup> Equal contribution</p>
+        </div>
+
+        <div class="emails">
+            <a href="mailto:nour@example.com">nour@example.com</a> <span class="separator">|</span>
+            <a href="mailto:boraq@example.com">boraq@example.com</a> <span class="separator">|</span>
+            <a href="mailto:islam@example.com">islam@example.com</a> <span class="separator">|</span>
+            <a href="mailto:el-sana@cs.bgu.ac.il">el-sana@cs.bgu.ac.il</a>
         </div>
 
         <a href="https://zenodo.org/" target="_blank" class="btn">Access Dataset on Zenodo</a>
@@ -466,7 +504,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Boraq Madi, Nour Atamni, Jihad El-Sana, Islam Nassar</p>
+        <p>&copy; 2026 Nour Atamni, Boraq Madi, Islam Ammar, Jihad El-Sana</p>
     </footer>
 
 </body>
